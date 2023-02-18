@@ -28,7 +28,16 @@ class _HomePageState extends State<HomePage> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(height: 200, color: Colors.deepPurple),
+              child: Container(
+                height: 200,
+                color: Colors.deepPurple,
+                child: const Text(
+                  "Something",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),

@@ -28,47 +28,52 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
         home: Scaffold(
       body: pages[index],
-      bottomNavigationBar: GNav(
-          rippleColor:
-              Colors.grey.shade800, // tab button ripple color when pressed
-          hoverColor: Colors.grey.shade800, // tab button hover color
-          haptic: true, // haptic feedback
-          tabBorderRadius: 15,
-          tabActiveBorder:
-              Border.all(color: Colors.black, width: 1), // tab button border
-          tabBorder:
-              Border.all(color: Colors.grey, width: 1), // tab button border
-          tabShadow: [
-            BoxShadow(color: Colors.grey.withOpacity(0.5), blurRadius: 8)
-          ], // tab button shadow
-          curve: Curves.easeOutExpo, // tab animation curves
-          duration: const Duration(milliseconds: 900), // tab animation duration
-          gap: 8, // the tab button gap between icon and text
-          color: Colors.grey[800], // unselected icon color
-          activeColor: Colors.purple, // selected icon and text color
-          iconSize: 24, // tab button icon size
-          tabBackgroundColor:
-              Colors.purple.withOpacity(0.1), // selected tab background color
-          padding: const EdgeInsets.symmetric(
-              horizontal: 20, vertical: 5), // navigation bar padding
-          tabs: const [
-            GButton(
-              icon: Icons.home,
-              text: 'Home',
-            ),
-            GButton(
-              icon: Icons.email,
-              text: 'Likes',
-            ),
-            GButton(
-              icon: Icons.favorite,
-              text: 'Search',
-            ),
-            GButton(
-              icon: Icons.usb_rounded,
-              text: 'Profile',
-            )
-          ]),
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          child: GNav(
+              backgroundColor: Colors.white,
+              // tabBorderRadius: 10,
+              // tabBorder: Border,
+              gap: 8,
+              // tabBackgroundColor: Colors.grey,
+              padding: EdgeInsets.all(16),
+              // backgroundColor: Colors.black,
+              // navigation bar padding
+              tabs: [
+                GButton(
+                  backgroundColor: Color(0xFFE92327),
+                  icon: Icons.home,
+                  iconActiveColor: Colors.white,
+                  text: 'Home',
+                  textColor: Colors.white,
+                ),
+                GButton(
+                  backgroundColor: Color(0xFFE92327),
+                  iconActiveColor: Colors.white,
+                  icon: Icons.email,
+                  // iconColor: Colors.white,
+                  textColor: Colors.white,
+                  text: 'Likes',
+                ),
+                GButton(
+                  backgroundColor: Color(0xFFE92327),
+                  icon: Icons.favorite,
+                  iconActiveColor: Colors.white,
+                  text: 'Search',
+                  textColor: Colors.white,
+                ),
+                GButton(
+                  backgroundColor: Color(0xFFE92327),
+                  icon: Icons.usb_rounded,
+                  iconActiveColor: Colors.white,
+                  textColor: Colors.white,
+                  text: 'Profile',
+                )
+              ]),
+        ),
+      ),
     ));
   }
 }

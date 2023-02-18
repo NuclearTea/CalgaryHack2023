@@ -1,57 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/events.dart';
+import 'package:my_app/home.dart';
+import 'package:my_app/roomfinder.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int index = 0;
+  final pages = <Widget>[
+    const HomePage(),
+    const EventsPage(),
+    const RoomFinder()
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Home",
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+        home: Scaffold(
+      body: pages[index],
+      bottomNavigationBar: NavigationBar(
+        height: 50,
+        selectedIndex: index,
+        onDestinationSelected: (value) => setState(() => index = value),
+        destinations: const [
+          NavigationDestination(
+              icon: Icon(Icons.email_outlined),
+              selectedIcon: Icon(Icons.email),
+              label: "Page 1"),
+          NavigationDestination(
+              icon: Icon(Icons.chat_bubble_outlined),
+              selectedIcon: Icon(Icons.chat_bubble),
+              label: "Page 1"),
+          NavigationDestination(
+              icon: Icon(Icons.videocam_outlined),
+              selectedIcon: Icon(Icons.videocam),
+              label: "Page 1"),
+        ],
       ),
-      home: const MyHomePage(title: 'Home Page'),
-    );
+    ));
   }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body:
-            SingleChildScrollView() // This trailing comma makes auto-formatting nicer for build methods.
-        );
-  }
-
-  Widget buildCard() => Container(
-        width: 200,
-        height: 200,
-        color: Colors.black,
-      );
 }

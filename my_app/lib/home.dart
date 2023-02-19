@@ -17,6 +17,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          title: const Text("University of Calgary"),
           backgroundColor: const Color(0xFFE92327),
         ),
         body: Column(
@@ -26,7 +27,7 @@ class _HomePageState extends State<HomePage> {
               child: Text(
                 "Today at UCalgary",
                 textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
             Expanded(
@@ -35,8 +36,6 @@ class _HomePageState extends State<HomePage> {
                 options: CarouselOptions(
                   viewportFraction: 0.95,
                   enlargeFactor: 0,
-                  // autoPlay: true,
-                  // aspectRatio: 1.0,
                   enlargeCenterPage: true,
                 ),
                 items: const [
@@ -55,144 +54,38 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            // Expanded(
-            //   flex: 2,
-            //   child: ListView(
-            //     scrollDirection: Axis.horizontal,
-            //     children: [
-            //       Padding(
-            //         padding: const EdgeInsets.all(8.0),
-            //         child: Container(
-            //             height: 200,
-            //             width: 400,
-            //             color: Colors.blue,
-            //             child: const Text(
-            //               "Something",
-            //               style: TextStyle(
-            //                 fontSize: 16,
-            //               ),
-            //             )),
-            //       ),
-            //       Padding(
-            //         padding: const EdgeInsets.all(8.0),
-            //         child: Container(
-            //             height: 200,
-            //             width: 400,
-            //             color: Colors.green,
-            //             child: const Text(
-            //               "Something",
-            //               style: TextStyle(
-            //                 fontSize: 16,
-            //               ),
-            //             )),
-            //       ),
-            //       Padding(
-            //         padding: const EdgeInsets.all(8.0),
-            //         child: Container(
-            //           height: 200,
-            //           width: 400,
-            //           color: Colors.green,
-            //           child: const Text(
-            //             "Something",
-            //             style: TextStyle(
-            //               fontSize: 16,
-            //             ),
-            //           ),
-            //         ),
-            //       ),
-            //       Padding(
-            //         padding: const EdgeInsets.all(8.0),
-            //         child: Container(
-            //             height: 200,
-            //             width: 400,
-            //             color: Colors.green,
-            //             child: const Text(
-            //               "Something",
-            //               style: TextStyle(
-            //                 fontSize: 16,
-            //               ),
-            //             )),
-            //       ),
-            //       Padding(
-            //         padding: const EdgeInsets.all(8.0),
-            //         child: Container(
-            //             height: 200,
-            //             width: 400,
-            //             color: Colors.green,
-            //             child: const Text(
-            //               "Something",
-            //               style: TextStyle(
-            //                 fontSize: 16,
-            //               ),
-            //             )),
-            //       ),
-            //       Padding(
-            //         padding: const EdgeInsets.all(8.0),
-            //         child: Container(
-            //             height: 200,
-            //             color: Colors.green,
-            //             child: const Text(
-            //               "Something",
-            //               style: TextStyle(
-            //                 fontSize: 16,
-            //               ),
-            //             )),
-            //       ),
-            //     ],
-            //   ),
-            // ),
             const Expanded(
               flex: 1,
               child: Text(
                 "Events",
                 textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
             Expanded(
               flex: 5,
               child: ListView(
-                children: [
-                  // Padding(
-                  //   padding: const EdgeInsets.all(8.0),
-                  //   child: Container(
-                  //       height: 200,
-                  //       color: Colors.deepPurple,
-                  //       child: const Text(
-                  //         "Something",
-                  //         style: TextStyle(
-                  //           fontSize: 16,
-                  //         ),
-                  //       )),
-                  // ),
-                  const Padding(
+                children: const [
+                  Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 12.5, 0),
                     child: Image(
                       height: 115,
                       image: AssetImage("assets/e1.png"),
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 12.5, 0),
                     child: Image(
                       height: 115,
                       image: AssetImage("assets/e2.png"),
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 12.5, 0),
                     child: Image(
                       height: 115,
                       image: AssetImage("assets/e3.png"),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(height: 200, color: Colors.deepPurple),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(height: 200, color: Colors.deepPurple),
                   ),
                 ],
               ),

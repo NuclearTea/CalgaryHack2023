@@ -1,57 +1,79 @@
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:my_app/events.dart';
+import 'package:my_app/home.dart';
+import 'package:my_app/roomfinder.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int index = 0;
+  final pages = <Widget>[
+    const HomePage(),
+    const EventsPage(),
+    const RoomFinder()
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Home",
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
+        home: Scaffold(
+      body: pages[index],
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          child: GNav(
+              backgroundColor: Colors.white,
+              // tabBorderRadius: 10,
+              // tabBorder: Border,
+              gap: 8,
+              // tabBackgroundColor: Colors.grey,
+              padding: EdgeInsets.all(16),
+              // backgroundColor: Colors.black,
+              // navigation bar padding
+              tabs: [
+                GButton(
+                  backgroundColor: Color(0xFFE92327),
+                  icon: Icons.home,
+                  iconActiveColor: Colors.white,
+                  text: 'Home',
+                  textColor: Colors.white,
+                ),
+                GButton(
+                  backgroundColor: Color(0xFFE92327),
+                  iconActiveColor: Colors.white,
+                  icon: Icons.email,
+                  // iconColor: Colors.white,
+                  textColor: Colors.white,
+                  text: 'Likes',
+                ),
+                GButton(
+                  backgroundColor: Color(0xFFE92327),
+                  icon: Icons.favorite,
+                  iconActiveColor: Colors.white,
+                  text: 'Search',
+                  textColor: Colors.white,
+                ),
+                GButton(
+                  backgroundColor: Color(0xFFE92327),
+                  icon: Icons.usb_rounded,
+                  iconActiveColor: Colors.white,
+                  textColor: Colors.white,
+                  text: 'Profile',
+                )
+              ]),
         ),
-        body:
-            SingleChildScrollView() // This trailing comma makes auto-formatting nicer for build methods.
-        );
+      ),
+    ));
   }
-
-  Widget buildCard() => Container(
-        width: 200,
-        height: 200,
-        color: Colors.black,
-      );
 }

@@ -1,85 +1,180 @@
-import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:my_app/events.dart';
-import 'package:my_app/home.dart';
-import 'package:my_app/mypage.dart';
-import 'package:my_app/roomfinder.dart';
-import 'package:my_app/providers/event_provider.dart';
-import 'package:provider/provider.dart';
+import 'dart:async';
+import 'dart:io';
 
-void main() {
-  runApp(const MyApp());
+import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
+import 'package:my_app/display.dart';
+import 'package:my_app/roomfinder.dart';
+
+import 'dart:convert';
+
+import 'events.dart';
+import 'home.dart';
+import 'mypage.dart';
+
+Future<void> main() async {
+  // Ensure that plugin services are initialized so that `availableCameras()`
+  // can be called before `runApp()`
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Obtain a list of the available cameras on the device.
+  final cameras = await availableCameras();
+
+  // Get a specific camera from the list of available cameras.
+  final firstCamera = cameras.first;
+
+  runApp(
+    MaterialApp(
+      theme: ThemeData.dark(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => TakePictureScreen(camera: firstCamera),
+        '/Display': (context) => MyApp(),
+        '/Home': (context) => HomePage(),
+        '/RoomFinder': (context) => RoomFinder(),
+        '/EventsPage': (context) => EventsPage(),
+        '/PersonalPage': (context) => PersonalPage()
+      },
+    ),
+  );
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+// A screen that allows users to take a picture using a given camera.
+class TakePictureScreen extends StatefulWidget {
+  const TakePictureScreen({
+    super.key,
+    required this.camera,
+  });
+
+  final CameraDescription camera;
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  TakePictureScreenState createState() => TakePictureScreenState();
 }
 
-class _MyAppState extends State<MyApp> {
-  int index = 0;
-  final pages = <Widget>[
-    const HomePage(),
-    const RoomFinder(),
-    const EventsPage(),
-    const PersonalPage()
-  ];
+class TakePictureScreenState extends State<TakePictureScreen> {
+  late CameraController _controller;
+  late Future<void> _initializeControllerFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    // To display the current output from the Camera,
+    // create a CameraController.
+    _controller = CameraController(
+      // Get a specific camera from the list of available cameras.
+      widget.camera,
+      // Define the resolution to use.
+      ResolutionPreset.medium,
+    );
+
+    // Next, initialize the controller. This returns a Future.
+    _initializeControllerFuture = _controller.initialize();
+  }
+
+  @override
+  void dispose() {
+    // Dispose of the controller when the widget is disposed.
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => EventProvider())],
-      child: MaterialApp(
-          home: Scaffold(
-        body: pages.elementAt(index),
-        bottomNavigationBar: Container(
-          color: Colors.white,
-          child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: GNav(
-                backgroundColor: Colors.white,
-                gap: 8,
-                padding: const EdgeInsets.all(16),
-                tabs: const [
-                  GButton(
-                    backgroundColor: Color(0xFFE92327),
-                    icon: Icons.home,
-                    iconActiveColor: Colors.white,
-                    text: 'Home',
-                    textColor: Colors.white,
-                  ),
-                  GButton(
-                    backgroundColor: Color(0xFFE92327),
-                    iconActiveColor: Colors.white,
-                    icon: Icons.map_outlined,
-                    // iconColor: Colors.white,
-                    textColor: Colors.white,
-                    text: 'Map',
-                  ),
-                  GButton(
-                    backgroundColor: Color(0xFFE92327),
-                    icon: Icons.calendar_month,
-                    iconActiveColor: Colors.white,
-                    text: 'Events',
-                    textColor: Colors.white,
-                  ),
-                  GButton(
-                    backgroundColor: Color(0xFFE92327),
-                    icon: Icons.person,
-                    iconActiveColor: Colors.white,
-                    text: 'Account',
-                    textColor: Colors.white,
-                  ),
-                ],
-                selectedIndex: index,
-                onTabChange: (value) => setState(() {
-                  index = value;
-                }),
-              )),
-        ),
-      )),
+    return Scaffold(
+      appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          title: const Text(
+              style: TextStyle(color: Colors.black), 'Scan Unicard')),
+      // You must wait until the controller is initialized before displaying the
+      // camera preview. Use a FutureBuilder to display a loading spinner until the
+      // controller has finished initializing.
+      body: FutureBuilder<void>(
+        future: _initializeControllerFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            // If the Future is complete, display the preview.
+            return CameraPreview(_controller);
+          } else {
+            // Otherwise, display a loading indicator.
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        // Provide an onPressed callback.
+        onPressed: () async {
+          // Take the Picture in a try / catch block. If anything goes wrong,
+          // catch the error.
+          try {
+            // Ensure that the camera is initialized.
+            await _initializeControllerFuture;
+
+            // Attempt to take a picture and get the file `image`
+            // where it was saved.
+            final image = await _controller.takePicture();
+
+            if (!mounted) return;
+
+            // If the picture was taken, display it on a new screen.
+            await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => DisplayPictureScreen(
+                  // Pass the automatically generated path to
+                  // the DisplayPictureScreen widget.
+                  imagePath: image.path,
+                ),
+              ),
+            );
+          } catch (e) {
+            // If an error occurs, log the error to the console.
+            print(e);
+          }
+        },
+        child: const Icon(Icons.camera_alt),
+      ),
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
+  }
+}
+
+// A widget that displays the picture taken by the user.
+class DisplayPictureScreen extends StatelessWidget {
+  final String imagePath;
+
+  const DisplayPictureScreen({super.key, required this.imagePath});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+            centerTitle: true,
+            backgroundColor: Colors.white,
+            title: const Text(
+                style: TextStyle(color: Colors.black), 'Generating Account')),
+        // The image is stored as a file on the device. Use the `Image.file`
+        // constructor with the given path to display the image.
+        body: Column(
+          children: [
+            Center(
+              child: Image.file(height: 500, File(imagePath)),
+            ),
+            const Text("Authenticating University of Calgary"),
+            TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                  shape: const BeveledRectangleBorder(),
+                  padding: const EdgeInsets.all(16.0),
+                  textStyle: const TextStyle(fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/Display');
+                },
+                child: const Text("Confirm Data")),
+          ],
+        ));
   }
 }

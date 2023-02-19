@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:my_app/events.dart';
 import 'package:my_app/home.dart';
+import 'package:my_app/mypage.dart';
 import 'package:my_app/roomfinder.dart';
 
 void main() {
@@ -20,28 +21,24 @@ class _MyAppState extends State<MyApp> {
   final pages = <Widget>[
     const HomePage(),
     const EventsPage(),
-    const RoomFinder()
+    const RoomFinder(),
+    const PersonalPage()
   ];
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-      body: pages[index],
+      body: pages.elementAt(index),
       bottomNavigationBar: Container(
         color: Colors.white,
-        child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          child: GNav(
+        child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            child: GNav(
               backgroundColor: Colors.white,
-              // tabBorderRadius: 10,
-              // tabBorder: Border,
               gap: 8,
-              // tabBackgroundColor: Colors.grey,
-              padding: EdgeInsets.all(16),
-              // backgroundColor: Colors.black,
-              // navigation bar padding
-              tabs: [
+              padding: const EdgeInsets.all(16),
+              tabs: const [
                 GButton(
                   backgroundColor: Color(0xFFE92327),
                   icon: Icons.home,
@@ -66,13 +63,17 @@ class _MyAppState extends State<MyApp> {
                 ),
                 GButton(
                   backgroundColor: Color(0xFFE92327),
-                  icon: Icons.usb_rounded,
+                  icon: Icons.card_membership,
                   iconActiveColor: Colors.white,
+                  text: 'Home',
                   textColor: Colors.white,
-                  text: 'Profile',
-                )
-              ]),
-        ),
+                ),
+              ],
+              selectedIndex: index,
+              onTabChange: (value) => setState(() {
+                index = value;
+              }),
+            )),
       ),
     ));
   }

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
@@ -14,3 +15,9 @@ class _EventsPageState extends State<EventsPage> {
     return const Placeholder();
   }
 }
+
+Widget buildCard() => Container(
+      width: 200,
+      height: 200,
+      color: Colors.black,
+    );

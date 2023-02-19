@@ -67,7 +67,7 @@ def get_events():
 
     return jsonify(result)
 
-@app.route('/event/<name', methods=['PUT', 'PATCH'])
+@app.route('/event/<name>', methods=['PUT', 'PATCH'])
 def favorite_event(name):
     event_to_fav = EventItem.query.get(name)
 

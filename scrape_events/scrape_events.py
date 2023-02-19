@@ -77,6 +77,7 @@ def scrape_events():
 				'time': dt,
 				'location': loc,
 				'tag2': tag2,
+				'favorite': False,
 			})
 
 

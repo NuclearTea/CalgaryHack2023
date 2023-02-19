@@ -17,26 +17,35 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(16))),
           title: const Text("University of Calgary"),
           backgroundColor: const Color(0xFFE92327),
         ),
         body: Column(
           children: [
-            const Expanded(
-              flex: 1,
-              child: Text(
-                "Today at UCalgary",
-                textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(30, 16, 0, 16),
+                child: const Expanded(
+                  flex: 1,
+                  child: Text(
+                    "Announcements",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
               ),
             ),
             Expanded(
-              flex: 6,
+              flex: 8,
               child: CarouselSlider(
                 options: CarouselOptions(
                   viewportFraction: 0.95,
                   enlargeFactor: 0,
                   enlargeCenterPage: true,
+                  autoPlay: true,
                 ),
                 items: const [
                   Image(
@@ -54,36 +63,40 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            const Expanded(
-              flex: 1,
-              child: Text(
-                "Events",
-                textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 0, 0, 16),
+              child: Container(
+                alignment: Alignment.centerLeft,
+                child: const Expanded(
+                  flex: 1,
+                  child: Text(
+                    "Happening Today",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
               ),
             ),
             Expanded(
-              flex: 5,
+              flex: 8,
               child: ListView(
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 12.5, 0),
-                    child: Image(
-                      height: 115,
-                      image: AssetImage("assets/e1.png"),
-                    ),
+                padding: EdgeInsets.fromLTRB(0, 0, 12.5, 0),
+                children: [
+                  Image(
+                    // height: 115,
+                    image: AssetImage("assets/e1.png"),
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 12.5, 0),
                     child: Image(
-                      height: 115,
+                      // height: 10,
                       image: AssetImage("assets/e2.png"),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 12.5, 0),
                     child: Image(
-                      height: 115,
+                      // height: 115,
                       image: AssetImage("assets/e3.png"),
                     ),
                   ),

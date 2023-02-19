@@ -15,6 +15,9 @@ class _EventsPageState extends State<EventsPage> {
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
+            shape: RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.vertical(bottom: Radius.circular(16))),
             title: const Text("Events"),
             backgroundColor: const Color(0xFFE92327),
           ),
@@ -48,24 +51,29 @@ class _EventsPageState extends State<EventsPage> {
                                     scrollDirection: Axis.vertical,
                                     itemCount: value.events.length,
                                     itemBuilder: (context, index) => Container(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 20.0),
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(30))),
+                                        padding: const EdgeInsets.fromLTRB(
+                                            20, 0, 20, 0),
                                         child: Stack(
                                           children: [
                                             Container(
-                                              padding: const EdgeInsets.all(8),
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      0, 0, 0, 20),
                                               decoration: const BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.all(
-                                                          Radius.circular(
-                                                              100))),
+                                                          Radius.circular(50))),
                                               child: Image(
                                                   image: NetworkImage(value
-                                                      .events[index].img_url)),
+                                                      .events[index + 1]
+                                                      .img_url)),
                                             ),
                                             Positioned(
                                                 // height: 100,
-                                                bottom: 10,
+                                                bottom: 30,
                                                 left: 50,
                                                 right: 50,
                                                 child: Container(

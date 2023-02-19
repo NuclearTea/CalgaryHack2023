@@ -14,7 +14,9 @@ class _PersonalPageState extends State<PersonalPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("University of Calgary"),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(16))),
+          title: const Text("Your UCalgary"),
           backgroundColor: const Color(0xFFE92327),
         ),
         body: Column(
@@ -29,6 +31,34 @@ class _PersonalPageState extends State<PersonalPage> {
                 "Your Schedule",
                 textAlign: TextAlign.left,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Expanded(
+              flex: 5,
+              child: ListView(
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(12.5, 0, 12.5, 0),
+                    child: Image(
+                      height: 115,
+                      image: AssetImage("assets/s1.png"),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(12.5, 0, 12.5, 0),
+                    child: Image(
+                      height: 115,
+                      image: AssetImage("assets/s2.png"),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(12.5, 0, 12.5, 0),
+                    child: Image(
+                      height: 115,
+                      image: AssetImage("assets/s3.png"),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

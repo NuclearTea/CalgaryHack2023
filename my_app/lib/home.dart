@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFFE92327),
+          backgroundColor: const Color(0xFFE92327),
         ),
         body: Column(
           children: [
@@ -39,28 +39,18 @@ class _HomePageState extends State<HomePage> {
                   // aspectRatio: 1.0,
                   enlargeCenterPage: true,
                 ),
-                items: [
-                  Container(
-                    // width: MediaQuery.of(context).size.width,
-                    // color: Colors.black,
-                    child: Image(
-                      image: AssetImage("assets/a1.png"),
-                    ),
+                items: const [
+                  Image(
+                    image: AssetImage("assets/a1.png"),
                   ),
-                  Container(
-                    color: Colors.white,
+                  Image(
+                    image: AssetImage("assets/a2.png"),
                   ),
-                  Container(
-                    color: Colors.blue,
+                  Image(
+                    image: AssetImage("assets/a3.png"),
                   ),
-                  Container(
-                    color: Colors.green,
-                  ),
-                  Container(
-                    color: Colors.purple,
-                  ),
-                  Container(
-                    color: Colors.grey,
+                  Image(
+                    image: AssetImage("assets/a4.png"),
                   ),
                 ],
               ),
@@ -175,31 +165,26 @@ class _HomePageState extends State<HomePage> {
                   //         ),
                   //       )),
                   // ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 12.5, 0),
-                    child: Container(
-                      child: Image(
-                        height: 115,
-                        image: AssetImage("assets/e1.png"),
-                      ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 12.5, 0),
+                    child: Image(
+                      height: 115,
+                      image: AssetImage("assets/e1.png"),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 200,
-                      color: Colors.deepPurple,
-                      child: const Text(
-                        "Something",
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 12.5, 0),
+                    child: Image(
+                      height: 115,
+                      image: AssetImage("assets/e2.png"),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(height: 200, color: Colors.deepPurple),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 12.5, 0),
+                    child: Image(
+                      height: 115,
+                      image: AssetImage("assets/e3.png"),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

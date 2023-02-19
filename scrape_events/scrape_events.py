@@ -45,7 +45,7 @@ def scrape_events():
 			if len(event.find_all('img')) > 0:
 				img = event.find_all('img')[0].get('src')
 			else:
-				img = None
+				img = ''
 			timeloc = event.find_all(class_='time-loc')[0].find_all('abbr')[0]['title']
 
 			timeloc = timeloc.split(' | ')

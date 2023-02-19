@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-// void main() {
-//   runApp(const MyApp());
-// }
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -13,6 +9,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+// MediaQuery.of(context).size.height;
+//  MediaQuery.of(context).size.width;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,14 +26,15 @@ class _HomePageState extends State<HomePage> {
             Container(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(30, 16, 0, 16),
-                child: const Expanded(
-                  flex: 1,
-                  child: Text(
-                    "Announcements",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
+                padding: EdgeInsets.fromLTRB(
+                    MediaQuery.of(context).size.width * 0.05,
+                    MediaQuery.of(context).size.width * 0.01,
+                    0,
+                    MediaQuery.of(context).size.width * 0.01),
+                child: Text(
+                  "Announcements",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -64,7 +64,11 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(30, 0, 0, 16),
+              padding: EdgeInsets.fromLTRB(
+                  MediaQuery.of(context).size.width * 0.05,
+                  0,
+                  0,
+                  MediaQuery.of(context).size.width * 0.01),
               child: Container(
                 alignment: Alignment.centerLeft,
                 child: const Expanded(
@@ -80,21 +84,24 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               flex: 8,
               child: ListView(
-                padding: EdgeInsets.fromLTRB(0, 0, 12.5, 0),
+                padding: EdgeInsets.fromLTRB(
+                    0, 0, MediaQuery.of(context).size.height * 0.02, 0),
                 children: [
                   Image(
                     // height: 115,
                     image: AssetImage("assets/e1.png"),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 12.5, 0),
+                    padding: EdgeInsets.fromLTRB(
+                        0, 0, MediaQuery.of(context).size.width * 0.02, 0),
                     child: Image(
                       // height: 10,
                       image: AssetImage("assets/e2.png"),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 12.5, 0),
+                    padding: EdgeInsets.fromLTRB(
+                        0, 0, MediaQuery.of(context).size.width * 0.02, 0),
                     child: Image(
                       // height: 115,
                       image: AssetImage("assets/e3.png"),

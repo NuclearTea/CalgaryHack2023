@@ -171,7 +171,8 @@ class DisplayPictureScreen extends StatelessWidget {
                   textStyle: const TextStyle(fontSize: 20),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/Display');
+                  // Navigator.pushNamed(context, '/Display');
+                  Navigator.pushReplacementNamed(context, '/Display');
                 },
                 child: const Text("Confirm Data")),
           ],

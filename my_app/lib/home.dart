@@ -63,21 +63,19 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(
-                  MediaQuery.of(context).size.width * 0.05,
-                  0,
-                  0,
-                  MediaQuery.of(context).size.width * 0.01),
+            Expanded(
+              flex: 1,
               child: Container(
+                padding: EdgeInsets.fromLTRB(
+                    MediaQuery.of(context).size.width * 0.05,
+                    0,
+                    0,
+                    MediaQuery.of(context).size.width * 0.01),
                 alignment: Alignment.centerLeft,
-                child: const Expanded(
-                  flex: 1,
-                  child: Text(
-                    "Happening Today",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
+                child: Text(
+                  "Happening Today",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
